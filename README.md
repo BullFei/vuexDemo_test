@@ -21,4 +21,4 @@ npm run lint
 ```
 
 ### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+See [vueDemo笔记指南](https://github.com/BullFei/vuexDemo_test/blob/master/README-vuex.md).
