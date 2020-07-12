@@ -59,8 +59,7 @@ export default {
 
  1. 组件中引入你需要的辅助函数
 
-    ```html
-    <script>
+    ```javascript
       //引入 辅助函数，采用类似解构赋值的方式
       //import Vuex from "vuex";
       //Vuex.mapState();
@@ -70,20 +69,17 @@ export default {
       export default{
         computed: mapState(['curCity','cart']);
       }
-</script>
     ```
     
 2. 调用赋值函数，并将其返回的值赋给组件的computed选项。
 
-```html
-<script>
+```javascript
   //引入赋值函数，采用类似解构赋值的方式
   import {mapState, mapGetters} from "vuex";
   export default {
     //mapState 返回值是一个对象
     computed: mapState()
   }
-</script>
 ```
 
 3. mapState 和 mapGetters 的语法
