@@ -8,13 +8,16 @@ export default {
         name: "张三"
     },
     getters: {
-        firstName(state){
+        firstName(state, getters, rootStates){
+            console.log(getters);
+            console.log(rootStates.mb.name); //可以通过它获取别的模块上的数据
+            
             return state.name.substring(0, 1);
         }
     },
     mutations: {
         SET_NAME(state, payload){
-            console.log("a")
+            
             state.name = payload;
         }
     },

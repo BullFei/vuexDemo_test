@@ -377,13 +377,66 @@ store.state.b // -> moduleB 的状态
 >    }
 >    ```
 >
->    
+
+#### 四、仓库模块的局部状态
+
+> 首先要知道，做了仓库模块的拆分之后，getter与mutation中的第一个参数state是当前模块的局部state。
+>
+> action中的第一个参数context。context中的state也是当前模块的局部state。
+>
+> 【注】有时我们需要在getter中action中获取到其余模块的state数据。
+
+#### getter语法
+
+```javascript
+getters:{
+  //state - 当前模块的state
+  //getter - 当前模块的getters 
+  //rootState - 根模块的state数据。根据他就可以方便的去获取到其余模块的 state
+  getter1(state, getters, rootState){
+    
+  }
+}
+```
+
+#### action的语法
+
+```javascript
+actions: {
+  //context 是一个对象，这个对象有一些属性
+  	//state - 当前模块的局部 state
+  	//getters - 当前模块的局部getters
+  	//commit - 提交mutation的方法
+  	//dispatch - 派发action的方法
+  //rootState - 根模块的state，根据他就可以方便的去获取到其余模块的state
+  
+  action1(context, payload){
+    
+  }
+}
+```
+
+#### 【注】!! mutation没有rootState这个东西。如果需要在mutation中使用其余模块的state数据的话，如何办？
+
+> 传递payload即可。比如在action中获取到需要的rootState然后作为mutation的payload传递过去！。
+
+#### 五、v-model 绑定仓库中的数据的情况
+
+> 问题现象：在input中输入的时候，会报错，也没有引起仓库数据的变化。
+>
+> 问题原因：根本原因是 仓库的state数据不允许直接去修改。并且拿数据的时候是用computed取出的。
+>
+> 解决：1. 仓库中需要提供一个mutation来处理变化。
+>
+> ​		    2. 组件中给对应的computed提供一个getter和setter
 
 
 
-
-
-
+> PS：仓库的state数据不允许修改这只是一个规定。如果你主动去修改的话，并不会报错。但是不推荐。（直接修改是可以的，但是在时间旅行部分没办法操作。）【注】严格模式下会报错。
+>
+> 为了更好的处理报错情况，所以state数据都是映射到组件的computed上。
+>
+> ？思考：描述一下为什么仓库数据需要在组件中使用computed来处理？
 
 
 
